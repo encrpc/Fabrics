@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embellishment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Video Banner */
+        .video-banner {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .video-banner video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-banner .dark-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .video-banner .text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            font-size: 5em;
+            font-family: 'Teko', sans-serif;
+            z-index: 2;
+        }
+
+        .video-banner .text-overlay button {
+            margin-top: 0;
+            padding: 10px 20px;
+            font-size: 0.35em;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .grid-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .row {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 5px 0;
+            position: relative;
+        }
+
+        .row img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .show-colors-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px; /* Align to right */
+            background: #2f3c48; /* Pantone 432C equivalent */
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 2;
+        }
+
+        .show-colors-btn:hover {
+            background: #ff0000; /* Red on hover */
+        }
+
+        .show-product-samples {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #2f3c48; /* Same color as the button */
+            cursor: pointer;
+            font-weight: bold;
+            text-align: right; /* Align to right */
+            width: 100%;
+        }
+
+        .show-product-samples:hover {
+            color: #ff0000; /* Red on hover */
+        }
+
+        /* Popup Modal */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+        }
+
+        .popup-content img {
+            width: 100%;
+            height: auto;
+        }
+
+        .close-popup {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        @media (max-width: 1024px) {
+            .grid-container {
+                grid-template-columns: repeat(8, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Video Banner -->
+    <div class="video-banner">
+        <video autoplay muted loop>
+            <source src="Emb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="dark-overlay"></div>
+        <div class="text-overlay">
+            <p>FABRIC DEVELOPMENT</p>
+            <button onclick="scrollToGrid()">Show All</button>
+        </div>
+    </div>
+<p><p><p><h2>
+<center>Encore Group develops all fabrics in house- down 
+to <br> the detail of yarn composition and 
+surface handling. True will have the ability to 
+collaboratively develop fabrics to <br> best serve 
+innovative  product development, 
+player performance 
+and customer satisfaction.</center></h2>
+    <!-- Image Grid  -->
+    <div id="image-grid" class="grid-container">
+        <div class="grid-item">
+            <div class="row"><img src="DT1.png" alt="Image 1-1"></div>
+            <div class="row"><img src="DT2.png" alt="Image 1-2"></div>
+            <div class="row">
+                  <button class="show-colors-btn" onclick="openPopup()">Show All Colors</button>;
+                <img src="DT3.png" alt="Image 1-3">
+            </div>
+            <div class="row"><img src="DT4.png" alt="Image 1-4"></div>
+            <div class="show-product-samples" onclick="window.open('https://example.com', '_blank')">Show Product Samples&nbsp;&nbsp;&nbsp;</div>
+
+ 
+ <div class="row"></div> <!-- Empty cell 1 -->
+    <div class="row"><img src="zzz.png" alt="Image 2-4"></div> <!-- Empty cell 2 -->
+        </div>
+
+
+
+    <!-- Image Grid -->
+        <div class="grid-item">
+            <div class="row"><img src="DTH1.png" alt="Image 2-1"></div>
+            <div class="row"><img src="DTH2.png" alt="Image 2-2"></div>
+            <div class="row">
+                <button class="show-colors-btn" onclick="openPopup()">Show All Colors</button>                 
+<img src="DT3.png" alt="Image 2-3">
+            </div>
+            <div class="row"><img src="DTH4.png" alt="Image 2-4"></div>
+            <div class="show-product-samples" onclick="window.open('https://example.com', '_blank')">Show Product Samples&nbsp;&nbsp;&nbsp;</div>
+
+ <div class="row"></div> <!-- Empty cell 1 -->
+    <div class="row"><img src="zzz.png" alt="Image 2-4"></div> <!-- Empty cell 2 -->
+        </div>
+
+
+
+
+  <!-- Image Grid -->
+        <div class="grid-item">
+            <div class="row"><img src="FT1.png" alt="Image 2-1"></div>
+            <div class="row"><img src="FT2.png" alt="Image 2-2"></div>
+            <div class="row">
+                <button class="show-colors-btn" onclick="openPopup()">Show All Colors</button>
+                <img src="FT3.png" alt="Image 2-3">
+            </div>
+            <div class="row"><img src="FT4.png" alt="Image 2-4"></div>
+            <div class="show-product-samples" onclick="window.open('https://example.com', '_blank')">Show Product Samples&nbsp;&nbsp;&nbsp;</div>
+
+ <div class="row"></div> <!-- Empty cell 1 -->
+    <div class="row"><img src="zzz.png" alt="Image 2-4"></div> <!-- Empty cell 2 -->
+        </div>
+
+
+
+
+  <!-- Image Grid -->
+        <div class="grid-item">
+            <div class="row"><img src="FL1.png" alt="Image 2-1"></div>
+            <div class="row"><img src="FL2.png" alt="Image 2-2"></div>
+            <div class="row">
+                <button class="show-colors-btn" onclick="openPopup()">Show All Colors</button>
+                <img src="FL3.png" alt="Image 2-3">
+            </div>
+            <div class="row"><img src="FL4.png" alt="Image 2-4"></div>
+            <div class="show-product-samples" onclick="window.open('https://example.com', '_blank')">Show Product Samples&nbsp;&nbsp;&nbsp;</div>
+
+ <div class="row"></div> <!-- Empty cell 1 -->
+    <div class="row"><img src="zzz.png" alt="Image 2-4"></div> <!-- Empty cell 2 -->
+        </div>
+
+
+
+
+
+  <!-- Image Grid -->
+        <div class="grid-item">
+            <div class="row"><img src="SF1.png" alt="Image 2-1"></div>
+            <div class="row"><img src="SF2.png" alt="Image 2-2"></div>
+            <div class="row">
+                <button class="show-colors-btn" onclick="openPopup()">Show All Colors</button>
+                <img src="3.png" alt="Image 2-3">
+            </div>
+            <div class="row"><img src="SF4.png" alt="Image 2-4"></div>
+            <div class="show-product-samples" onclick="window.open('https://example.com', '_blank')">Show Product Samples&nbsp;&nbsp;&nbsp;</div>
+
+ <div class="row"></div> <!-- Empty cell 1 -->
+    <div class="row"><img src="zzz.png" alt="Image 2-4"></div> <!-- Empty cell 2 -->
+        </div>
+
+
+
+
+
+  <!-- Image Grid -->
+        <div class="grid-item">
+            <div class="row"><img src="LT1.png" alt="Image 2-1"></div>
+            <div class="row"><img src="LT2.png" alt="Image 2-2"></div>
+            <div class="row">
+                <button class="show-colors-btn" onclick="openPopup()">Show All Colors</button>
+                <img src="3.png" alt="Image 2-3">
+            </div>
+            <div class="row"><img src="LT4.png" alt="Image 2-4"></div>
+            <div class="show-product-samples" onclick="window.open('https://example.com', '_blank')">Show Product Samples&nbsp;&nbsp;&nbsp;</div>
+
+ <div class="row"></div> <!-- Empty cell 1 -->
+    <div class="row"><img src="zzz.png" alt="Image 2-4"></div> <!-- Empty cell 2 -->
+        </div>
+
+
+
+
+
+  <!-- Image Grid -->
+        <div class="grid-item">
+            <div class="row"><img src="HY1.png" alt="Image 2-1"></div>
+            <div class="row"><img src="HY2.png" alt="Image 2-2"></div>
+            <div class="row">
+                <button class="show-colors-btn" onclick="openPopup()">Show All Colors</button>
+                <img src="3.png" alt="Image 2-3">
+            </div>
+            <div class="row"><img src="HY4.png" alt="Image 2-4"></div>
+            <div class="show-product-samples" onclick="window.open('https://example.com', '_blank')">Show Product Samples&nbsp;&nbsp;&nbsp;</div>
+
+ <div class="row"></div> <!-- Empty cell 1 -->
+    <div class="row"><img src="zzz.png" alt="Image 2-4"></div> <!-- Empty cell 2 -->
+        </div>
+
+
+
+
+
+  <!-- Image Grid -->
+        <div class="grid-item">
+            <div class="row"><img src="VT1.png" alt="Image 2-1"></div>
+            <div class="row"><img src="VT2.png" alt="Image 2-2"></div>
+            <div class="row">
+                <button class="show-colors-btn" onclick="openPopup()">Show All Colors</button>
+                <img src="3.png" alt="Image 2-3">
+            </div>
+            <div class="row"><img src="VT4.png" alt="Image 2-4"></div>
+            <div class="show-product-samples" onclick="window.open('https://example.com', '_blank')">Show Product Samples&nbsp;&nbsp;&nbsp;</div>
+
+ <div class="row"></div> <!-- Empty cell 1 -->
+    <div class="row"><img src="zzz.png" alt="Image 2-4"></div> <!-- Empty cell 2 -->
+        </div>
+
+
+
+
+  <!-- Image Grid -->
+        <div class="grid-item">
+            <div class="row"><img src="AT1.png" alt="Image 2-1"></div>
+            <div class="row"><img src="AT2.png" alt="Image 2-2"></div>
+            <div class="row">
+                <button class="show-colors-btn" onclick="openPopup()">Show All Colors</button>
+                <img src="3.png" alt="Image 2-3">
+            </div>
+            <div class="row"><img src="AT4.png" alt="Image 2-4"></div>
+            <div class="show-product-samples" onclick="window.open('https://example.com', '_blank')">Show Product Samples&nbsp;&nbsp;&nbsp;</div>
+
+ <div class="row"></div> <!-- Empty cell 1 -->
+    <div class="row"><img src="zzz.png" alt="Image 2-4"></div> <!-- Empty cell 2 -->
+        </div>
+
+
+
+
+  <!-- Image Grid -->
+        <div class="grid-item">
+            <div class="row"><img src="TT1.png" alt="Image 2-1"></div>
+            <div class="row"><img src="TT2.png" alt="Image 2-2"></div>
+            <div class="row">
+                <button class="show-colors-btn" onclick="openPopup()">Show All Colors</button>
+                <img src="FL3.png" alt="Image 2-3">
+            </div>
+            <div class="row"><img src="TT4.png" alt="Image 2-4"></div>
+            <div class="show-product-samples" onclick="window.open('https://example.com', '_blank')">Show Product Samples&nbsp;&nbsp;&nbsp;</div>
+
+ <div class="row"></div> <!-- Empty cell 1 -->
+    <div class="row"><img src="zzz.png" alt="Image 2-4"></div> <!-- Empty cell 2 -->
+        </div>
+
+
+
+
+
+  <!-- Image Grid -->
+        <div class="grid-item">
+            <div class="row"><img src="VE1.png" alt="Image 2-1"></div>
+            <div class="row"><img src="VE2.png" alt="Image 2-2"></div>
+            <div class="row">
+                <button class="show-colors-btn" onclick="openPopup()">Show All Colors</button>
+                <img src="FL3.png" alt="Image 2-3">
+            </div>
+            <div class="row"><img src="VE4.png" alt="Image 2-4"></div>
+            <div class="show-product-samples" onclick="window.open('https://example.com', '_blank')">Show Product Samples&nbsp;&nbsp;&nbsp;</div>
+
+ <div class="row"></div> <!-- Empty cell 1 -->
+    <div class="row"><img src="zzz.png" alt="Image 2-4"></div> <!-- Empty cell 2 -->
+        </div>
+
+
+
+
+
+  <!-- Image Grid -->
+        <div class="grid-item">
+            <div class="row"><img src="RT1.png" alt="Image 2-1"></div>
+            <div class="row"><img src="RT2.png" alt="Image 2-2"></div>
+            <div class="row">
+                <button class="show-colors-btn" onclick="openPopup()">Show All Colors</button>
+                <img src="FL3.png" alt="Image 2-3">
+            </div>
+            <div class="row"><img src="RT4.png" alt="Image 2-4"></div>
+            <div class="show-product-samples" onclick="window.open('https://example.com', '_blank')">Show Product Samples&nbsp;&nbsp;&nbsp;</div>
+
+ <div class="row"></div> <!-- Empty cell 1 -->
+    <div class="row"><img src="zzz.png" alt="Image 2-4"></div> <!-- Empty cell 2 -->
+        </div>
+
+
+
+
+
+
+  <!-- Image Grid -->
+        <div class="grid-item">
+            <div class="row"><img src="FO1.png" alt="Image 2-1"></div>
+            <div class="row"><img src="FO2.png" alt="Image 2-2"></div>
+            <div class="row">
+                <button class="show-colors-btn" onclick="openPopup()">Show All Colors</button>
+                <img src="FL3.png" alt="Image 2-3">
+            </div>
+            <div class="row"><img src="FO4.png" alt="Image 2-4"></div>
+            <div class="show-product-samples" onclick="window.open('https://example.com', '_blank')">Show Product Samples&nbsp;&nbsp;&nbsp;</div>
+
+ <div class="row"></div> <!-- Empty cell 1 -->
+    <div class="row"><img src="zzz.png" alt="Image 2-4"></div> <!-- Empty cell 2 -->
+        </div>
+
+
+
+
+
+
+    </div>
+
+    <!-- Popup Modal -->
+    <div id="popup" class="popup-overlay">
+        <div class="popup-content">
+            <button class="close-popup" onclick="closePopup()">X</button>
+            <p>Here you can add an image</p>
+            <img id="popup-img" src="111.jpg" alt="All Colors">
+        </div>
+    </div>
+
+    <script>
+        function scrollToGrid() {
+            const grid = document.getElementById('image-grid');
+            grid.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openPopup() {
+            document.getElementById('popup').style.display = 'flex';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
